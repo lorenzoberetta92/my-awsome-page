@@ -1,7 +1,7 @@
 name: "Page Build"
 on:
   push:
-    branches: [master]
+    branches: [main]
 jobs:
   Pages:
     runs-on: ubuntu-latest
