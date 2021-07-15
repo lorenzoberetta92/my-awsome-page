@@ -1,0 +1,23 @@
+name: "Page Build"
+on:
+  push:
+    branches: [master]
+  Pages:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+      with:
+        ref: refs/heads/master
+    - uses: actions/setup-node@master
+      with:
+        node-version: '14'
+    - run: npm ci
+    - run: npm run build --if-present
+    - run: npm test
+    - name: Deploy to Github Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./web
+        enable_jekyll: false
+
